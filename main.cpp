@@ -37,7 +37,7 @@ void os::osInit(){
     }
 
     for(int i = 0; i<40; i++){
-        buffer[i] = '\0';
+        buffer[i] = ' ';
     }
 
     ictr = 0;
@@ -54,7 +54,7 @@ void os::execute(){
         if(ir[0]=='G' && ir[1]=='D'){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int k = 0; k<40; k++){
-                buffer[k] = '\0';
+                buffer[k] = ' ';
             }
             input.getline(buffer, 40);
             int k = 0;
@@ -113,7 +113,7 @@ void os::load(){
     int x = 0;
     do{
         for(int i = 0; i<40; i++){
-            buffer[i] = '\0';
+            buffer[i] = ' ';
         }
 
         input.getline(buffer, 40);
@@ -149,11 +149,11 @@ void os::load(){
 
 int main(){
     os vm;
-    vm.input.open("input2.txt", ios::in);
+    vm.input.open("input.txt", ios::in);
     vm.output.open("output.txt", ios::out);
 
     vm.load();
-    
+
     return 0;
 
 }
