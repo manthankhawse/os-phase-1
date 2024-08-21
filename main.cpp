@@ -71,10 +71,10 @@ void os::execute(){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = loc; i<((loc+10)/10)*10; i++){
                 for(int j = 0; j<4; j++){
-                    cout<<memory[i][j];
+                    output<<memory[i][j];
                 }
             }
-            cout<<endl;
+            output<<'\n';
         }else if(ir[0]=='L' && ir[1]=='R'){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = 0; i<4; i++){
@@ -102,8 +102,8 @@ void os::execute(){
 
             cr = flag;
         }else if(ir[0]=='H'){
-            cout<<endl;
-            cout<<endl;
+            output<<"\n";
+            output<<"\n";
             break;   
         }
     }
