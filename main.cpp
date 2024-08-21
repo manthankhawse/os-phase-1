@@ -37,7 +37,7 @@ void os::osInit(){
     }
 
     for(int i = 0; i<40; i++){
-        buffer[i] = '\0';
+        buffer[i] = ' ';
     }
 
     ictr = 0;
@@ -54,7 +54,7 @@ void os::execute(){
         if(ir[0]=='G' && ir[1]=='D'){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int k = 0; k<40; k++){
-                buffer[k] = '\0';
+                buffer[k] = ' ';
             }
             input.getline(buffer, 40);
             int k = 0;
@@ -71,10 +71,10 @@ void os::execute(){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = loc; i<((loc+10)/10)*10; i++){
                 for(int j = 0; j<4; j++){
-                    cout<<memory[i][j];
+                    output<<memory[i][j];
                 }
             }
-            cout<<endl;
+            output<<'\n';
         }else if(ir[0]=='L' && ir[1]=='R'){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = 0; i<4; i++){
@@ -102,8 +102,8 @@ void os::execute(){
 
             cr = flag;
         }else if(ir[0]=='H'){
-            cout<<endl;
-            cout<<endl;
+            output<<"\n";
+            output<<"\n";
             break;   
         }
     }
@@ -113,7 +113,7 @@ void os::load(){
     int x = 0;
     do{
         for(int i = 0; i<40; i++){
-            buffer[i] = '\0';
+            buffer[i] = ' ';
         }
 
         input.getline(buffer, 40);
@@ -149,7 +149,7 @@ void os::load(){
 
 int main(){
     os vm;
-    vm.input.open("input2.txt", ios::in);
+    vm.input.open("input.txt", ios::in);
     vm.output.open("output.txt", ios::out);
 
     vm.load();
