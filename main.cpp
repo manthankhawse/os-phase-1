@@ -16,6 +16,7 @@ class os{
         // void showState();
         void load();
         void execute();
+        void MOS();
 
         fstream input;
         fstream output;
@@ -44,20 +45,17 @@ void os::osInit(){
     cr = false;
 }
 
-void os::execute(){
-    while(true){
-        for(int i = 0; i<4; i++){
-            ir[i] = memory[ictr][i];  
-        }
-        ictr++;
 
-        if(ir[0]=='G' && ir[1]=='D'){
-            int loc = (ir[2]-'0')*10+(ir[3]-'0');
-            for(int k = 0; k<40; k++){
+void os::MOS(){
+    int loc, k;
+    switch(si){
+        case 1:
+            loc = (ir[2]-'0')*10+(ir[3]-'0');
+            for(k = 0; k<40; k++){
                 buffer[k] = ' ';
             }
             input.getline(buffer, 40);
-            int k = 0;
+            k = 0;
             for(int i = loc; i<((loc+10)/10)*10; i++){
                 for(int j = 0; j<4; j++){
                     memory[i][j] = buffer[k];
@@ -67,14 +65,40 @@ void os::execute(){
                     break;
                 }
             }
-        }else if(ir[0]=='P' && ir[1]=='D'){
-            int loc = (ir[2]-'0')*10+(ir[3]-'0');
+        break;
+
+        case 2:
+            loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = loc; i<((loc+10)/10)*10; i++){
                 for(int j = 0; j<4; j++){
                     output<<memory[i][j];
                 }
             }
             output<<'\n';
+        break;
+
+        case 3:
+            output<<"\n";
+            output<<"\n";
+        break;
+    }
+
+}
+
+
+void os::execute(){
+    while(true){
+        for(int i = 0; i<4; i++){
+            ir[i] = memory[ictr][i];  
+        }
+        ictr++;
+
+        if(ir[0]=='G' && ir[1]=='D'){
+            si = 1;
+            MOS();
+        }else if(ir[0]=='P' && ir[1]=='D'){
+            si = 2;
+            MOS();
         }else if(ir[0]=='L' && ir[1]=='R'){
             int loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = 0; i<4; i++){
@@ -102,8 +126,8 @@ void os::execute(){
 
             cr = flag;
         }else if(ir[0]=='H'){
-            output<<"\n";
-            output<<"\n";
+            si = 3;
+            MOS();
             break;   
         }
     }
