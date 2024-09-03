@@ -13,7 +13,6 @@ class os{
 
     public:
         void osInit();
-        // void showState();
         void load();
         void execute();
         void MOS();
@@ -28,17 +27,17 @@ class os{
 void os::osInit(){
     for(int i = 0; i<100; i++){
         for(int j = 0; j<4; j++){
-            memory[i][j] = ' ';
+            memory[i][j] = '-';
         }
     }
 
     for(int i = 0; i<4; i++){
-        ir[i] = ' ';
-        reg[i] = ' ';
+        ir[i] = '-';
+        reg[i] = '-';
     }
 
     for(int i = 0; i<40; i++){
-        buffer[i] = ' ';
+        buffer[i] = '-';
     }
 
     ictr = 0;
@@ -52,7 +51,7 @@ void os::MOS(){
         case 1:
             loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(k = 0; k<40; k++){
-                buffer[k] = ' ';
+                buffer[k] = '-';
             }
             input.getline(buffer, 40);
             k = 0;
@@ -71,7 +70,10 @@ void os::MOS(){
             loc = (ir[2]-'0')*10+(ir[3]-'0');
             for(int i = loc; i<((loc+10)/10)*10; i++){
                 for(int j = 0; j<4; j++){
-                    output<<memory[i][j];
+                    if(memory[i][j]=='-')
+                        output<<' ';
+                    else
+                        output<<memory[i][j];
                 }
             }
             output<<'\n';
@@ -137,7 +139,7 @@ void os::load(){
     int x = 0;
     do{
         for(int i = 0; i<40; i++){
-            buffer[i] = ' ';
+            buffer[i] = '-';
         }
 
         input.getline(buffer, 40);
